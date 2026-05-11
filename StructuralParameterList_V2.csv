@@ -1,0 +1,121 @@
+﻿idx,name,units,LL,UL,Strategic_LL,Strategic_UL,Muliplier,Notes,Description
+0,L_3h,m,40,80,,,LOA,150<LOA<400 scale LOA to be 3H length* (random (3-4.5)),Length of 3 hold structure
+1,B,m,15,80,0.1,0.2,LOA,LOA/B between 5 and 10,Beam of Ship (although generated structure will be half beam)
+2,T,m,4.5,40,0.25,0.667,D,B/T  between 2 and 3.5,Draft of ship (not really used in the parameterization)
+3,D,m,10,40,0.3,0.8,B,LOA/D between 10 and 15,Depth of ship
+4,R_b,m,,,0.75,1,Db/1000,,Radius of Bilge
+5,l_overhang,fraction of L_3h,0.03,0.05,,,,,fraction of L_3h that extends past the bulkeads at the end of the structure
+6,Db,mm,800,3500,0.05,0.0675,B*1000,,height of double bottom
+7,bottom shell thickness,mm,12,30,,,,integer,bottom shell thickness
+8,side shell thickness,mm,8.5,30,,,,integer,side shell thickness
+9,Top Deck Thickness,mm,10,25,,,,integer,
+10,Inner Bottom Thickness,mm,8.5,20,,,,integer,
+11,Trans Bulkhead Thickness,mm,10,20,,,,integer,
+12,Inner Side Shell Thickness,mm,6,20,,,,Integer,"If less than 10 mm, set thickness to 0 -> no side wall"
+13,Shear Strake thickness ,mm,10,20,,,,integer,
+14,Shear Strake Height,mm,1000,2500,,,,,
+15,web frames per hold,integer,3,8,,,,,
+16,num bottom girders,integer,3,11,,,,,Number of girders between CL and edge of Web frames
+17,num intermediate bottom stiffeners,integer,3,6,,,,,
+18,num top girders,integer,3,11,,,,,Number of girders between CL and edge of Web frames
+19,num intermediate deck stiffeners,integer,3,6,,,,,
+20,num side shell stiffeners,integer,15,30,,,,, 
+21,num vertical bulkhead stiffeners,integer,12,24,,,,,
+22,num transverse bulkhead stiffeners,integer,12,24,,,,,
+23,bottom girder thickness,mm,6,12,,,,integer,
+24,intermediate bottom stiffener h,mm,120,320,,,,,h - height of stiffener
+25,intermediate bottom stiffener t,mm,7,12,,,,integer,t - plate thickness
+26,intermediate bottom stiffener w,mm,14,200,,,,,w - width of flange
+27,intermediate bottom stiffener torc,bool,0,1,,,,,boolean that controls if flange is a T of an L (mis-represented as 'C')
+28,trans deck beam h,mm,300,1000,,,,,
+29,trans deck beam t ,mm,10,25,,,,integer,
+30,trans deck beam w,mm,150,400,,,,,
+31,trans deck beam torc,bool,0,1,,,,,
+32,deck girder h,mm,500,1600,,,,,
+33,deck girder t,mm,10,25,,,,integer,
+34,deck girder w,mm,300,600,,,,,
+35, deck girder torc,bool,0,1,,,,,
+36,deck stiff h,mm,120,320,,,,,
+37,deck stiff t ,mm,7,12,,,,integer,
+38,deck stiff w,mm,14,200,,,,,
+39,deck stiff torc,bool,0,1,,,,,
+40,blkhd trans stiff h,mm,120,320,,,,,
+41,blkhd trans stiff t,mm,7,12,,,,integer,
+42,blkhd trans stiff w,mm,14,200,,,,,
+43,blkhd trans stiff torc,bool,0,1,,,,,
+44,blkhd vert stiff h,mm,120,320,,,,,
+45,blkhd vert stiff t,mm,7,12,,,,integer,
+46,blkhd vert stiff w,mm,14,200,,,,,
+47,blkhd vert stiff torc,bool,0,1,,,,,
+48,web frame h,mm,1000,2500,,,,,
+49,web frame  t,mm,10,25,,,,integer,
+50,web frame w,mm,300,600,,,,0 if inner-side shell thickness>0,
+51,web frame torc,bool,0,1,,,,,
+52,floor t,mm,10,30,,,,integer,Floors - transverse Beam that span the height of the double bottom
+53,side shell Long stiff h,mm,120,320,,,,,
+54,side shell long stiff t,mm,7,12,,,,integer,
+55,side shell long stiff w,mm,14,200,,,,,
+56,side shell long stiff torc,bool,0,1,,,,,
+57,cat tanker,one hot encode,0,1,,,,only one is activated,controls if structure is 'tanker'
+58,cat container,one hot encode,0,1,,,,only one is activated,controls if structure is 'container'
+59,cat bulkcarrier,one hot encode,0,1,,,,only one is activated,controls if structure is 'bulk carrier'
+60,floor web bracket L1,mm,500,1000,3000,5000,cat bulkcarrier,dependent on ship class,Snap L1 to closest  inner bottom stiffener or Bottom Girder
+61,floor web bracket L2,mm,500,1000,3000,5000,,dependent on ship class,Snap L2 to closest inner side shell long stiffener
+62,floor web bracket t,mm,10,25,,,,integer,
+63,deck web bracket L1,mm,500,1000,3000,5000,cat bulkcarrier,dependent on ship class,Snap L1 to closest Deck Girder or Deck Stiffener
+64,deck web bracket  L2 ,mm,500,1000,3000,5000,,dependent on ship class,Snap L2 to closest inner side shell long stiffener
+65,deck web bracke t,mm,10,25,,,,integer,
+66,cont step height,mm,2600,5500,,,,heights  1 or 2 shipping containers + buffer,
+67,cont step width,mm,2500,5500,,,,widths of 1 or 2 shipping containers + buffer,
+68,cont step deck plate thickness,mm,10,25,,,,integer,
+69,con step side plate thickness,mm,10,20,,,,interger,
+70,num cont step deck stiff,integer,3,6,,,,,
+71,cont step deck stiff h,mm,120,320,,,,,
+72,cont step deck stiff t,mm,7,12,,,,integer,
+73, cont step deck stiff w,mm,14,200,,,,,
+74,cont step deck stiff torc,bool,0,1,,,,,
+75,num cont step side stiff,integer,5,10,,,,,
+76,cont step side stiff h,mm,120,320,,,,,
+77,cont step side stiff t,mm,7,12,,,,integer,
+78,cont step side stiff w,mm,14,200,,,,,
+79,cont step side stiff torc,bool,0,1,,,,,
+80,bulk car bottom hopper t,mm,15,25,,,,integer,
+81,bulk car top hopper t,mm,15,25,,,,integer,
+82,num bulk car bottom hopper stiff,integer,3,6,,,,,
+83,bulk car bottom hopper stiff h,mm,120,320,,,,,
+84,bulk car bottom hopper stiff t,mm,7,12,,,,integer,
+85,bulk car bottom hopper stiff w,mm,14,200,,,,,
+86,bulk car bottom hopper stiff torc,bool,0,1,,,,,
+87,num bulk car top hopper stiff,integer,3,6,,,,,
+88,bulk car top hopper stiff h,mm,120,320,,,,,
+89,bulk car top hopper stiff t,mm,7,12,,,,integer,
+90,bulk car top hopper stiff w,mm,14,200,,,,,
+91,bulk car top hopper stiff torc,bool,0,1,,,,,
+92,num intermediate trans frames,integer,2,4,,,,,number of frames between each web frame
+93,intermediate bottom frame h,mm,120,320,,,,,
+94,intermediate bottom frame t,mm,7,12,,,,integer,
+95,intermediate bottom frame w,mm,14,200,,,,,
+96,intermediate bottom frame torc,bool,0,1,,,,,
+97,intermediate side frame h,mm,120,320,,,,,
+98,intermediate side frame t,mm,7,12,,,,integer,
+99,intermediate side frame w,mm,14,200,,,,,
+100,intermediate side frame torc,bool,0,1,,,,,
+101,intermediate deck frame h,mm,120,320,,,,,
+102,intermediate deck frame t,mm,7,12,,,,integer,
+103,intermediate deck frame w,mm,14,200,,,,,
+104,intermediatedeck frame torc,bool,0,1,,,,,
+105,longitudinal bulkhead bit,bool,0,1,,,,random probability of L bulkhead 20%,
+106,num longitudinal bulkheads,integer,1,3,,,,"options: [1: 0.0, 2: 0.16666667, 3: (0,0.25)]",
+107,long blkhd plate t,mm,10,18,,,,integer,
+108,long blkhd long stiff h,mm,120,320,,,,,
+109,long blkhd long stiff t,mm,7,12,,,,integer,
+110,long blkhd long stiff w,mm,100,200,,,,,
+111,long blkhd long stiff torc,bool,0,1,,,,,
+112,long blkhd vert stiff h,mm,120,320,,,,,
+113,long blkhd vert stiff t,mm,7,12,,,,integer,
+114,long blkhd vert stiff w,mm,100,200,,,,,
+115,long blkhd vert stiff torc,bool,0,1,,,,,
+116,Hatch Openings Bit,bool,0,1,,,,,"if there are hatch openings, there will be one centered in each hold. "
+117,Hatch Opening L,fraction of L_3h,0.166667,0.3,,,,,
+118,Hatch Opening W,fraction of B,0.25,0.8,,,,,
+119,Hatch Opening R,mm,25,200,,,,,
