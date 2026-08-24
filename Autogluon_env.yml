@@ -1,0 +1,33 @@
+# Portable Conda environment for the MiDShip data-generation pipelines.
+#
+# Create the environment with:
+#   conda env create --file Autogluon_env.yml
+#
+# Update an existing environment with:
+#   conda env update --name Autogluon_env --file Autogluon_env.yml --prune
+#
+# Rhino and its embedded Python modules are installed with Rhino separately;
+# they are not managed by this Conda environment.
+
+name: Autogluon_env
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Match the Python and AutoGluon versions used for the current experiments.
+  - python=3.12.10
+  - autogluon=1.3.0
+
+  # Core numerical, machine-learning, and plotting packages used by the scripts.
+  - numpy=1.26.4
+  - pandas=2.2.3
+  - scikit-learn=1.6.1
+  - pytorch=2.6.0
+  - matplotlib-base=3.10.3
+  - seaborn=0.13.2
+  - tqdm=4.67.1
+
+  # Notebook kernel used by Regression_Training_And_Optimization.ipynb.
+  - ipykernel=7.2.0
