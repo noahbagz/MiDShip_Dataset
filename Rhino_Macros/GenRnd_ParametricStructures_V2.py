@@ -8,6 +8,7 @@
 import numpy as np
 import pandas as pd
 import importlib
+import os
 
 import rhino_StructGen as rhino_SG
 import rhinoscriptsyntax as rs
@@ -15,9 +16,14 @@ import rhinoscriptsyntax as rs
 import Parametric_Structure_V2
 #from Parametric_Structure_V2 import Structure_3H as S3H
 
-path = '/Users/noahbagazinski/Documents/MIT/Research/Ship_Structures/Dataset_Structures_V2_1'
+# Legacy combined parameter-and-structure entry point.  New repository runs
+# should use Generate_Random_Parameters.py followed by
+# Batched_Structure_Generation.py so each stage can be resumed independently.
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+path = os.path.join(PROJECT_ROOT, 'MiDShip_Dataset', 'Random_Structures')
 
-starting_idx = 4000
+starting_idx = 5000 
 num_samp = 1050
 df = Parametric_Structure_V2.Structure_3H.gen_rnd_Sturctures(num_samples = num_samp)
 
@@ -59,4 +65,3 @@ if len(error_idx) > 0:
 
 df_updated = pd.DataFrame(updated_params, columns=df.columns)
 df_updated.to_csv(path + '/Random_Parametric_Designs_'+f'{starting_idx}_'+f'{starting_idx+num_samp-1}_Updated.csv', index=False)
-

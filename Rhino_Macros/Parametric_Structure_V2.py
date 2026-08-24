@@ -17,6 +17,7 @@ import numpy as np
 import pandas as pd
 import rhino_StructGen as rhino_SG 
 import rhinoscriptsyntax as rs
+import os
 
 #import time to clock the time it takes to generate the structures
 import time
@@ -36,9 +37,18 @@ class Structure_3H:
     param_idx_container = np.array([66,67,68,69,70,71,72,73,74,75,76,77,78,79]) #The indices of the parameters that are for the container step
     param_idx_bulkcarrier = np.array([80,81,82,83,84,85,86,87,88,89,90,91]) #The indices of the parameters that are for the bulk carrier
 
-    #Load the parametric design data
-    Param_Dict = pd.read_csv('/Users/noahbagazinski/Documents/MIT/Research/Ship_Structures/StructuralParameterList_V2.csv')
-
+    # Load the parameter definitions from the dataset using a repository-
+    # relative path.  This keeps the Rhino module portable when the repository
+    # is cloned to a different computer or user account.
+    _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    _PROJECT_ROOT = os.path.dirname(_SCRIPT_DIR)
+    _PARAMETER_RANGE_CSV = os.path.join(
+        _PROJECT_ROOT,
+        "MiDShip_Dataset",
+        "Random_Structures",
+        "StructuralParameterList_V2_Updated_Ranges.csv",
+    )
+    Param_Dict = pd.read_csv(_PARAMETER_RANGE_CSV)
 
 
     def __init__(self, params, path,id):
