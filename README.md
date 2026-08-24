@@ -18,6 +18,29 @@ treated as related subsets rather than statistically independent samples.
        width="100%">
 </p>
 
+## Dataset access
+
+The MiDShip dataset is hosted separately because the complete CAD, drawing,
+and tabular collection is too large to distribute through this GitHub
+repository.
+
+> **Dataset download:** [Download the MiDShip dataset](<LINK>)
+
+After downloading the dataset, extract it into the repository root using the
+following directory name and subset structure:
+
+```text
+Ship_Structures/
+└── MiDShip_Dataset/
+    ├── Random_Structures/
+    ├── SGLD_Gen_Structures/
+    └── Repaired_Structures/
+```
+
+The generation, repair, drawing, and evaluation scripts use these relative
+paths. No source-code changes are required when the external dataset is placed
+in this location.
+
 ## Dataset at a glance
 
 | Subset | Attempted candidates | Retained designs | Fully feasible | Mean constraint violations | Mean nearest-neighbor distance |
@@ -70,15 +93,10 @@ class, plate dimensions, and stiffener/girder spacing and sizing.
 
 ```text
 Ship_Structures/
-├── MiDShip_Dataset/                    # Released random, SGLD, and repaired data
-│   ├── Random_Structures/
-│   ├── SGLD_Gen_Structures/
-│   └── Repaired_Structures/
 ├── Rhino_Macros/                       # Parameter, CAD, and drawing generation
-├── Constraint_Optimization_Pipeline/   # Repair workflow and shared Rhino worker
-├── SGLD_Optimization_Results/          # Surrogate training and SGLD experiment
+├── equation_repair_pipeline/          # Repair workflow and shared Rhino worker
+├── sgld_generation_pipeline/          # Surrogate training and SGLD experiment
 ├── tools/                              # Constraint evaluation and repair functions
-├── MiDShip_Structure_Dataset_Preprint/ # Manuscript source and figures
 ├── Regression_Training_And_Optimization.ipynb
 ├── StructuralParameterList_V2_Updated_Ranges.csv
 └── Autogluon_env.yml
@@ -86,15 +104,15 @@ Ship_Structures/
 
 The principal maintained components are:
 
-- [`MiDShip_Dataset`](MiDShip_Dataset/README.md): the released dataset and its
-  subset-specific file naming conventions;
+- `MiDShip_Dataset`: the separately downloaded random, SGLD-generated, and
+  equation-repaired design subsets used by the pipelines;
 - [`Parametric_Structure_V2.py`](Rhino_Macros/Parametric_Structure_V2.py): the
   parametric cargo-hold geometry definition used inside Rhino;
 - [`rhino_StructGen.py`](Rhino_Macros/rhino_StructGen.py): structure export and
   structural-element data generation;
 - [`rhino_2D_Drawing.py`](Rhino_Macros/rhino_2D_Drawing.py): procedural
   engineering-drawing generation;
-- [`batched_structure_generation.py`](Constraint_Optimization_Pipeline/batched_structure_generation.py):
+- [`batched_structure_generation.py`](equation_repair_pipeline/batched_structure_generation.py):
   the shared restartable Rhino structure-generation supervisor;
 - [`Batched_Drawing_Generation.py`](Rhino_Macros/Batched_Drawing_Generation.py):
   the restartable drawing-generation supervisor;
@@ -102,11 +120,13 @@ The principal maintained components are:
   structural-property and constraint evaluation;
 - [`repair_parametric_designs.py`](tools/repair_parametric_designs.py): the
   equation-informed parameter repair rules;
-- [`sgld_experiment.py`](SGLD_Optimization_Results/sgld_experiment.py): the
+- [`sgld_experiment.py`](sgld_generation_pipeline/sgld_experiment.py): the
   notebook-faithful surrogate-training and SGLD candidate-generation method.
 
 The entry points documented below are the maintained dataset-generation
-workflows.
+workflows. The two pipeline directories contain only their maintained source
+files; models, checkpoints, intermediate batches, figures, and statistics are
+generated locally when the corresponding pipeline runs.
 
 ## Requirements
 
@@ -170,19 +190,18 @@ exceedances are sampled independently by constraint family.
 Generate repaired parameter vectors without starting Rhino:
 
 ```bash
-python Constraint_Optimization_Pipeline/generate_repaired_parameters.py
+python equation_repair_pipeline/generate_repaired_parameters.py
 ```
 
 Run the complete resumable repair workflow—candidate generation, Rhino,
 exact evaluation, publication into `MiDShip_Dataset`, and t-SNE plotting:
 
 ```bash
-bash Constraint_Optimization_Pipeline/run_repaired_dataset_pipeline.sh
+bash equation_repair_pipeline/run_repaired_dataset_pipeline.sh
 ```
 
-See [`Constraint_Optimization_Pipeline/README.md`](Constraint_Optimization_Pipeline/README.md)
-for the repair rules, fixed experiment settings, and historical neural/graft
-experiments.
+See [`equation_repair_pipeline/README.md`](equation_repair_pipeline/README.md)
+for the repair rules and fixed experiment settings.
 
 ### 3. SGLD-generated subset
 
@@ -196,12 +215,12 @@ creates the comparison plots and summary tables.
 Run the complete resumable workflow with:
 
 ```bash
-bash SGLD_Optimization_Results/run_sgld_pipeline.sh
+bash sgld_generation_pipeline/run_sgld_pipeline.sh
 ```
 
 Individual stages can be run with `--stage candidates`, `rhino`, `evaluate`,
 `publish`, or `analysis`. See
-[`SGLD_Optimization_Results/README.md`](SGLD_Optimization_Results/README.md)
+[`sgld_generation_pipeline/README.md`](sgld_generation_pipeline/README.md)
 for the fixed model and SGLD settings.
 
 ### 4. Drawing generation
@@ -286,10 +305,7 @@ For commercial licensing inquiries, contact
 
 ## Manuscript and citation
 
-The accompanying manuscript, **“MiDShip: Multimodal Dataset of Ship Cargo
-Hold Structures for Engineering Design,”** is available as
-[`MiDShip_Structure_Dataset_Preprint.pdf`](MiDShip_Structure_Dataset_Preprint/MiDShip_Structure_Dataset_Preprint.pdf).
-Its LaTeX source, figures, and bibliography are stored in
-[`MiDShip_Structure_Dataset_Preprint`](MiDShip_Structure_Dataset_Preprint/).
-A final citation entry should be added here when the archival publication or
-preprint identifier is available.
+The dataset and generation methods are described in the accompanying
+manuscript, **“MiDShip: Multimodal Dataset of Ship Cargo Hold Structures for
+Engineering Design.”** A formal citation and archival publication link will
+be added when they are available.
