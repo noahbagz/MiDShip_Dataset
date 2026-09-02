@@ -294,11 +294,11 @@ of global design-space coverage.
        width="100%">
 </p>
 
-## Dual Licensing
+## License
 
-This software is available under a dual-licensing model. It is free for
-open-source and academic use under the GNU General Public License version 3
-(GPLv3). Proprietary use requires a separate commercial license.
+The MiDShip code repository is released under the GNU General Public License
+version 3 (GNU GPL-3.0). Proprietary use requires a separate commercial
+license.
 
 For commercial licensing inquiries, contact
 [noahbagz@mit.edu](mailto:noahbagz@mit.edu).
@@ -309,3 +309,7 @@ The dataset and generation methods are described in the accompanying
 manuscript, **“MiDShip: Multimodal Dataset of Ship Cargo Hold Structures for
 Engineering Design.”** A formal citation and archival publication link will
 be added when they are available.
+
+## Disclaimer
+
+Disclaimer: This research was funded by the American Bureau of Shipping (ABS). The opinions, findings, conclusions, technical approach, analysis, calculations, and recommendations expressed herein, including any use, interpretation, or derivation of ABS Rule requirements or formulas, are solely those of the author(s) and have not been reviewed, validated, or endorsed by ABS. Nothing in this paper may be relied upon as a statement or interpretation of the ABS Rules or as a substitute for the ABS Rules as published by ABS, which govern in all cases. ABS makes no representation or warranty as to the accuracy or fitness for any purpose of the material herein and assumes no liability arising from its use.
