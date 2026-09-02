@@ -24,7 +24,7 @@ The MiDShip dataset is hosted separately because the complete CAD, drawing,
 and tabular collection is too large to distribute through this GitHub
 repository.
 
-> **Dataset download:** [Download the MiDShip dataset](<LINK>)
+> **Dataset download:** [MiDShip on Hugging Face](https://huggingface.co/datasets/DeCoDELab/MiDShip)
 
 After downloading the dataset, extract it into the repository root using the
 following directory name and subset structure:
